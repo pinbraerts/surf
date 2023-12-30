@@ -754,7 +754,7 @@ seturiparameters(Client *c, const char *uri, ParamName *params)
 void
 setparameter(Client *c, int refresh, ParamName p, const Arg *a)
 {
-	GdkRGBA bgcolor = { 0 };
+	GdkRGBA bgcolor = { 0, 0, 0, 0.7 };
 
 	modparams[p] = curconfig[p].prio;
 
@@ -1387,7 +1387,7 @@ winevent(GtkWidget *w, GdkEvent *e, Client *c)
 void
 showview(WebKitWebView *v, Client *c)
 {
-	GdkRGBA bgcolor = { 0 };
+	GdkRGBA bgcolor = { 0, 0, 0, 0.7 };
 	GdkWindow *gwin;
 
 	c->finder = webkit_web_view_get_find_controller(c->view);
@@ -1395,6 +1395,10 @@ showview(WebKitWebView *v, Client *c)
 
 	c->pageid = webkit_web_view_get_page_id(c->view);
 	c->win = createwindow(c);
+	gtk_widget_set_app_paintable(c->win, TRUE);
+	GdkScreen* screen = gtk_widget_get_screen(c->win);
+	GdkVisual* visual = gdk_screen_get_rgba_visual(screen);
+	gtk_widget_set_visual(c->win, visual);
 
 	gtk_container_add(GTK_CONTAINER(c->win), GTK_WIDGET(c->view));
 	gtk_widget_show_all(c->win);
