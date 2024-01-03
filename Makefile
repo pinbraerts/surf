@@ -18,7 +18,7 @@ options:
 	@echo "CFLAGS        = $(SURFCFLAGS) $(CFLAGS)"
 	@echo "WEBEXTCFLAGS  = $(WEBEXTCFLAGS) $(CFLAGS)"
 	@echo "LDFLAGS       = $(LDFLAGS)"
-	echo $(SURFCFLAGS) $(CFLAGS) | sed -e 's/\ /\n/g' | grep -e "-[ID]" > compile_flags.txt
+	echo $(SURFCFLAGS) $(WEBEXTCFLAGS) $(CFLAGS) | sed -e 's/\ /\n/g' | grep -e "-[ID]" > compile_flags.txt
 
 surf: $(OBJ)
 	$(CC) $(SURFLDFLAGS) $(LDFLAGS) -o $@ $(OBJ) $(LIBS)
