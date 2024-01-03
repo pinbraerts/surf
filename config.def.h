@@ -66,13 +66,18 @@ static WebKitFindOptions findopts = WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE |
 #define PROMPT_FIND "Find:"
 
 /* SETPROP(readprop, setprop, prompt)*/
+#define SETPROPA(r, s, p) { \
+        .v = (const char *[]){ "/bin/sh", "-c", \
+             "prop=\"$(mzm ddg_fzf.sh)\" " \
+             "&& xprop -id $1 -f "s" 8u -set "s" \"$prop\"", \
+             "surf-setprop", winid, NULL \
+        } \
+}
+
+/* SETPROP(readprop, setprop, prompt)*/
 #define SETPROP(r, s, p) { \
         .v = (const char *[]){ "/bin/sh", "-c", \
-             "prop=\"$(printf '%b' \"$(xprop -id $1 "r" " \
-             "| sed -e 's/^"r"(UTF8_STRING) = \"\\(.*\\)\"/\\1/' " \
-             "      -e 's/\\\\\\(.\\)/\\1/g' " \
-             "&& cat ~/.surf/bookmarks)\" " \
-             "| dmenu -p '"p"' -w $1)\" " \
+             "prop=\"$(ask \'"p"\')\" " \
              "&& xprop -id $1 -f "s" 8u -set "s" \"$prop\"", \
              "surf-setprop", winid, NULL \
         } \
@@ -143,7 +148,7 @@ static SiteSpecific certs[] = {
  */
 static Key keys[] = {
 	/* modifier              keyval          function    arg */
-	{ MODKEY,                GDK_KEY_g,      spawn,      SETPROP("_SURF_URI", "_SURF_GO", PROMPT_GO) },
+	{ MODKEY,                GDK_KEY_g,      spawn,      SETPROPA("_SURF_URI", "_SURF_GO", PROMPT_GO) },
 	{ MODKEY,                GDK_KEY_f,      spawn,      SETPROP("_SURF_FIND", "_SURF_FIND", PROMPT_FIND) },
 	{ MODKEY,                GDK_KEY_slash,  spawn,      SETPROP("_SURF_FIND", "_SURF_FIND", PROMPT_FIND) },
 	{ MODKEY,                GDK_KEY_m,      spawn,      BM_ADD("_SURF_URI") },
