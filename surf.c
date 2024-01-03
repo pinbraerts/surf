@@ -2158,7 +2158,7 @@ main(int argc, char *argv[])
 	if (argc > 0)
 		arg.v = argv[0];
 	else
-		arg.v = HOMEPAGE;
+		arg.v = "about:blank";
 
 	setup();
 	c = newclient(NULL);
