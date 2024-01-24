@@ -17,7 +17,7 @@ static Parameter defconfig[ParameterLast] = {
 	/* parameter                    Arg value       priority */
 	[AccessMicrophone]    =       { { .i = 0 },     },
 	[AccessWebcam]        =       { { .i = 0 },     },
-	// [Certificate]         =       { { .i = 1 },     },
+	[Certificate]         =       { { .i = 1 },     },
 	[CaretBrowsing]       =       { { .i = 0 },     },
 	[CookiePolicies]      =       { { .v = "Aa@" }, },
 	[DarkMode]            =       { { .i = 1 },     },
@@ -127,7 +127,16 @@ static WebKitFindOptions findopts = WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE |
  */
 static SiteSpecific styles[] = {
 	/* regexp               file in $styledir */
-	{ ".*",                 "default.css" },
+	// { ".*",             "default.css" },
+	{ "suckless.org",      "default.css" },
+	{ "duckduckgo.com",    "default.css" },
+	{ "lichess.org",       "default.css" },
+	{ "voidlinux.org",     "default.css" },
+	{ "stackoverflow.com", "stackoverflow.css" },
+	{ "*.archlinux.org", "arch.css" },
+	{ "archlinux.org", "arch.css" },
+	// { "x.org",             "default.css" },
+	// { "github.com",        "github.css" },
 };
 
 /* certificates */
