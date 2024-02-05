@@ -73,7 +73,7 @@ readsock(GIOChannel *s, GIOCondition c, gpointer unused)
 		snprintf(js, sizeof(js),
 		         "window.scrollBy(window.innerWidth/100*%d,0);",
 		         msg[2]);
-		jsc_context_evaluate(jsc, js, -1);
+		g_object_unref(jsc_context_evaluate(jsc, js, -1));
 		break;
 	case 'v':
 		if (msgsz != 3)
@@ -81,7 +81,7 @@ readsock(GIOChannel *s, GIOCondition c, gpointer unused)
 		snprintf(js, sizeof(js),
 		         "window.scrollBy(0,window.innerHeight/100*%d);",
 		         msg[2]);
-		jsc_context_evaluate(jsc, js, -1);
+		g_object_unref(jsc_context_evaluate(jsc, js, -1));
 		break;
 	}
 
