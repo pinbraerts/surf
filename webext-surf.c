@@ -26,7 +26,7 @@ msgsurf(guint64 pageid, const char *s)
 	size_t sln = strlen(s);
 	int ret;
 
-	if ((ret = snprintf(msg, sizeof(msg), "%c%s", pageid, s))
+	if ((ret = snprintf(msg, sizeof(msg), "%c%s", (char)pageid, s))
 	    >= sizeof(msg)) {
 		fprintf(stderr, "webext: msg: message too long: %d\n", ret);
 		return;
@@ -56,8 +56,7 @@ readsock(GIOChannel *s, GIOCondition c, gpointer unused)
 	}
 
 	if (msgsz < 2) {
-		fprintf(stderr, "webext: readsock: message too short: %d\n",
-		        msgsz);
+		fprintf(stderr, "webext: readsock: message too short: %lu\n", msgsz);
 		return TRUE;
 	}
 

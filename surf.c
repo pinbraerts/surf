@@ -1257,7 +1257,7 @@ readsock(GIOChannel *s, GIOCondition ioc, gpointer unused)
 		return TRUE;
 	}
 	if (msgsz < 2) {
-		fprintf(stderr, "surf: message too short: %d\n", msgsz);
+		fprintf(stderr, "surf: message too short: %lu\n", msgsz);
 		return TRUE;
 	}
 
@@ -1903,7 +1903,7 @@ msgext(Client *c, char type, const Arg *a)
 	if (spair[0] < 0)
 		return;
 
-	if ((ret = snprintf(msg, sizeof(msg), "%c%c%c", c->pageid, type, a->i))
+	if ((ret = snprintf(msg, sizeof(msg), "%c%c%c", (char)c->pageid, type, a->i))
 	    >= sizeof(msg)) {
 		fprintf(stderr, "surf: message too long: %d\n", ret);
 		return;
@@ -1911,7 +1911,7 @@ msgext(Client *c, char type, const Arg *a)
 
 	if (send(spair[0], msg, ret, 0) != ret)
 		fprintf(stderr, "surf: error sending: %u%c%d (%d)\n",
-		        c->pageid, type, a->i, ret);
+		        (char)c->pageid, type, a->i, ret);
 }
 
 void
