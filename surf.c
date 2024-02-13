@@ -982,7 +982,13 @@ evalscript(Client *c, const char *jsstr, ...)
 	script = g_strdup_vprintf(jsstr, ap);
 	va_end(ap);
 
-	webkit_web_view_run_javascript(c->view, script, NULL, NULL, NULL);
+	webkit_web_view_evaluate_javascript(
+		c->view,
+		script, strlen(script),
+		NULL, NULL,
+		NULL, NULL,
+		NULL
+	);
 	g_free(script);
 }
 
