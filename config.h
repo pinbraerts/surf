@@ -68,8 +68,8 @@ static WebKitFindOptions findopts = WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE |
 /* SETPROP(readprop, setprop, prompt)*/
 #define SETPROPA(r, s, p) { \
         .v = (const char *[]){ "/bin/sh", "-c", \
-             "prop=\"$(st -i -g 50x20 -t Surf -n Surf ddg_fzf.sh)\" " \
-             "&& xprop -id $1 -f "s" 8u -set "s" \"$prop\"", \
+             "st -i -g 50x20 -t Surf -n Surf fzf_autocomplete" \
+             "| xargs -r xprop -id $1 -f " s " 8u -set " s, \
              "surf-setprop", winid, NULL \
         } \
 }
@@ -77,8 +77,8 @@ static WebKitFindOptions findopts = WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE |
 /* SETPROP(readprop, setprop, prompt)*/
 #define SETPROP(r, s, p) { \
         .v = (const char *[]){ "/bin/sh", "-c", \
-             "prop=\"$(ask \'"p"\' $1)\" " \
-             "&& xprop -id $1 -f "s" 8u -set "s" \"$prop\"", \
+             "ask \'"p"\' $1" \
+             "| xargs -r xprop -id $1 -f " s " 8u -set " s, \
              "surf-setprop", winid, NULL \
         } \
 }
