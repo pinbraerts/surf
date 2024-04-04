@@ -29,4 +29,4 @@ SURFCFLAGS = -fPIC $(INCS) $(CPPFLAGS)
 WEBEXTCFLAGS = -fPIC $(WEBEXTINC)
 
 # compiler
-CC = clang
+CC = zig cc
