@@ -615,12 +615,10 @@ geturi(Client *c)
 void
 setatom(Client *c, int a, const char *v)
 {
-	if (GDK_IS_X11_DISPLAY(dpy)) {
 	XChangeProperty(dpy, c->xid,
 	                atoms[a], atoms[AtomUTF8], 8, PropModeReplace,
 	                (unsigned char *)v, strlen(v) + 1);
 	XSync(dpy, False);
-	}
 }
 
 const char *
@@ -1413,9 +1411,7 @@ showview(WebKitWebView *v, Client *c)
 	gtk_widget_grab_focus(GTK_WIDGET(c->view));
 
 	gwin = gtk_widget_get_window(GTK_WIDGET(c->win));
-	if (GDK_IS_X11_DISPLAY(dpy)) {
 	c->xid = gdk_x11_window_get_xid(gwin);
-	}
 	updatewinid(c);
 	if (showxid) {
 		gdk_display_sync(gtk_widget_get_display(c->win));
