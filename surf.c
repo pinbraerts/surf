@@ -1458,7 +1458,6 @@ createwindow(Client *c)
 		g_free(wmstr);
 
 		gtk_window_set_default_size(GTK_WINDOW(w), winsize[0], winsize[1]);
-		gtk_window_set_decorated(GTK_WINDOW(w), 0);
 	}
 
 	g_signal_connect(G_OBJECT(w), "destroy",
